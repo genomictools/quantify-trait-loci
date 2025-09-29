@@ -1,0 +1,15 @@
+[submodule "conf"]
+	path = conf
+	url = git@github.com:genomictools/conf.git
+[submodule "bin"]
+	path = bin
+	url = git@github.com:genomictools/bin.git
+	branch = quantify-trait-loci
+[submodule "modules"]
+	path = modules
+	url = git@github.com:genomictools/modules.git
+	branch = quantify-trait-loci
+[submodule "subworkflows"]
+	path = subworkflows
+	url = git@github.com:genomictools/subworkflows.git
+	branch = quantify-trait-loci
