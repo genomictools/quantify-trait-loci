@@ -7,23 +7,19 @@
 #SBATCH -t 120:00:00
 
 # Setup test directory
-mkdir -p tests/ tests/input
+mkdir -p tests/
 
-# Download dataset
-URL="https://raw.githubusercontent.com/andreyshabalin/MatrixEQTL/refs/heads/master/data"
-wget -c $URL/GE.txt -O tests/input/GE.txt
-wget -c $URL/geneloc.txt -O tests/input/geneloc.txt
-wget -c $URL/SNP.txt -O tests/input/SNP.txt
-wget -c $URL/snpsloc.txt -O tests/input/snpsloc.txt
-wget -c $URL/Covariates.txt -O tests/input/Covariates.txt
+TESTDATA="git@github.com:genomictools/test-datasets.git"
+BRANCH="quantify-trait-loci"
+SRC="tests/input"
 
-echo -e "cohort,category,snps,traits,covariates" > tests/input/cohorts_info.csv
-echo -e "test,all,input/SNP.txt,input/GE.txt,input/Covariates.txt" >> tests/input/cohorts_info.csv
-
-cd tests/
+git -C $SRC pull || \
+git clone -b $BRANCH $TESTDATA $SRC
 
 # Run nextflow
 module load Nextflow
+
+cd tests/
 
 # nextflow run genomictools/quantify-trait-loci -r main \
 nextflow run ../main.nf \
